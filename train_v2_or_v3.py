@@ -21,20 +21,20 @@ VALID_ENCODERS = {
 
 def parse_args():
     ap = argparse.ArgumentParser("RF-DETR Medium single-run trainer (v2 or v3)")
-    ap.add_argument("--data", required=True, help="Dataset root with train/valid/test")
-    ap.add_argument("--out", default="./runs", help="Root output dir for TB & checkpoints")
-    ap.add_argument("--epochs", type=int, default=20)
+    ap.add_argument("--data", default=r"C:\Users\zhaoshuo\Desktop\duizhong\zuizhong\coco", help="Dataset root with train/valid/test")
+    ap.add_argument("--out", default=r"C:\Users\zhaoshuo\Desktop\duizhong\model\dinov3", help="Root output dir for TB & checkpoints")
+    ap.add_argument("--epochs", type=int, default=100)
     ap.add_argument("--bs", type=int, default=8, help="Batch size per iteration") ##TODO #Not actually applying, not worked out why
-    ap.add_argument("--workers", type=int, default=None,
+    ap.add_argument("--workers", type=int, default=2,
                     help="DataLoader workers (default: 0 on Windows, else 2)")
-    ap.add_argument("--encoder", default="dinov2",
+    ap.add_argument("--encoder", default="dinov3_base",
                     help=("dinov2|v2|dinov2_small|dinov2_base|dinov3|v3|"
                           "dinov3_small|dinov3_base|dinov3_large or exact name"))
     ap.add_argument("--name", default=None, help="Optional run name (subdir under --out)")
 
     # Optional local DINOv3 assets
-    ap.add_argument("--dinov3-repo", default=None, help="Local DINOv3 repo (sets DINOV3_REPO)")
-    ap.add_argument("--dinov3-weights", default=None, help="Path to DINOv3 .pth (sets DINOV3_WEIGHTS)")
+    ap.add_argument("--dinov3-repo", default=r"C:\Users\zhaoshuo\Desktop\git_PR\dinov3", help="Local DINOv3 repo (sets DINOV3_REPO)")
+    ap.add_argument("--dinov3-weights", default=r"C:\Users\zhaoshuo\Desktop\git_PR\rf-detr_dinov3\rf-detr\dinov3_vitb16.pth", help="Path to DINOv3 .pth (sets DINOV3_WEIGHTS)")
     return ap.parse_args()
 
 def resolve_encoder(enc_str: str) -> str:
